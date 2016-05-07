@@ -1,14 +1,12 @@
-# GeoThing
-A lightweight geocaching app for the 21.16th century.
+# GeoThing API
+A REST-ful API powered by Express and NodeJS, with a MongoDB database and Mongoose ODM.
 
-This project aims to provide an end-to-end geocaching solution that consists of:
-- A robust REST-ful API.
-- Beautiful and intuitive mobile applications for iOS and Android.
+Currently plan is to provide simple CRUD operations on Geocache, User and Log objects.
 
-## Technologies/Libraries Used
-**Note:** This list is tentative and is subject to change.
-- [NodeJS](https://nodejs.org/en/)
-- [Express](http://expressjs.com/) (For REST API)
-- [MongoDB](https://www.mongodb.com/)
-- [Mongoose](http://mongoosejs.com/) (ODM Wrapper to interact with Mongo)
-- [React Native](https://facebook.github.io/react-native/) (For mobile apps)
+## Running the GeoThing API
+- Ensure you have [https://nodejs.org/en/](NodeJS) installed.
+- Install node packages.  
+`npm install`
+- Run the API server.  
+`node server.js`
+- Server defaults to port 8080. Point your browser to "http://localhost:8080/api" to test.
