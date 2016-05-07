@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // Setting port
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 8080; //Default to 8080 unless port parameter is set
 
 // Setting up MongoDB
 mongoose.connect('mongodb://localhost/geothing');
@@ -36,9 +36,9 @@ router.get('/', function(req, res) {
 });
 
 // Registering routes ==================================================================================================
+app.use('/api', router); // Base route
 var users = require('./routes/users');
-app.use('/api', router);
-app.use('/api', users.router);
+app.use('/api', users.router); // Users routes
 
 // Format JSON responses for prettification by setting number of spaces
 app.set('json spaces', 2);

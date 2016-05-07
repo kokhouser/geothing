@@ -1,7 +1,11 @@
+// Routes for user operations.
+// Created by HaoZhe on 5/7/2016
+
 var express = require('express');
 var router = express.Router();
 var models = require('../models/geocache');
 
+// https://{Base URL}/api/users
 router.route('/users')
 	// Adds a new user
 	.post(function (req, res) {
@@ -24,6 +28,7 @@ router.route('/users')
 		});
 	});	
 
+// https://{Base URL}/api/users/{user id}
 router.route('/users/:user_id')
 	// Gets a user by ID
 	.get(function(req,res) {
@@ -51,6 +56,7 @@ router.route('/users/:user_id')
 		});
 	})
 
+	// Deletes a user by ID
 	.delete(function(req, res) {
 		models.User.remove({
 			_id: req.params.user_id

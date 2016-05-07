@@ -1,3 +1,6 @@
+// Model for Mongoose
+// Created by HaoZhe on 5/7/2016
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
