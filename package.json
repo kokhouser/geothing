@@ -1,0 +1,12 @@
+{
+    "name": "geothing",
+    "main": "server.js",
+    "description": "Geocache app thing.",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "express": "4.x",
+        "mongoose": "~3.6.13",
+        "body-parser": "~1.0.1"
+    }
+}
