@@ -4,7 +4,7 @@ A REST-ful API powered by Express and NodeJS, with a MongoDB database and Mongoo
 Current plan is to provide simple CRUD operations on Geocache, User and Log objects.
 
 ## Running the GeoThing API
-- Ensure you have [https://nodejs.org/en/](NodeJS) installed.
+- Ensure you have [NodeJS](https://nodejs.org/en/) installed.
 - Install node packages.
 `npm install`
 - Run the API server.
