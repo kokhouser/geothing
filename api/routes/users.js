@@ -55,8 +55,8 @@ router.route('/users/:user_id')
                 res.send(err);
             } else {
                 // Update user info based on request body
-                user.name = req.body.name;
-
+                user.username = req.body.username;
+                user.email = req.body.email;
                 user.save(function (err) {
                     if (err) {
                         res.send(err);
