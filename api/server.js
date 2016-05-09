@@ -37,8 +37,12 @@ router.get('/', function (req, res) {
 
 // Registering routes ==================================================================================================
 app.use('/api', router); // Base route
+// Users routes
 var users = require('./routes/users');
-app.use('/api', users.router); // Users routes
+app.use('/api', users.router);
+// Geocaches routes
+var geocaches = require('./routes/geocaches');
+app.use('/api', geocaches.router);
 
 // Format JSON responses for prettification by setting number of spaces
 app.set('json spaces', 2);

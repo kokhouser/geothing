@@ -26,7 +26,9 @@ router.route('/users')
 
     // Gets all users
     .get(function (req, res) {
-        models.User.find(function (err, users) {
+        // Populating geocache data for visited and created
+        models.User.find({}).populate('geocachesVisited geocachesCreated')
+            .exec(function (err, users) {
             if (err) {
                 res.send(err);
             } else {
@@ -39,7 +41,9 @@ router.route('/users')
 router.route('/users/:user_id')
     // Gets a user by ID
     .get(function (req, res) {
-        models.User.findById(req.params.user_id, function (err, user) {
+        // Populating geocache data for visited and created
+        models.User.findById.populate('geocachesVisited geocachesCreated')
+            .exec(req.params.user_id, function (err, user) {
             if (err) {
                 res.send(err);
             } else {
