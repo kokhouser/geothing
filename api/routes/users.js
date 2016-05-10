@@ -1,12 +1,21 @@
-/**
- * Routes for user operations.
- */
+//Routes for user operations.
 
 var express = require('express');
 var router = express.Router();
 var userModel = require('../models/user');
 
-// https://{Base URL}/api/users
+/**
+ * @api {get} api/users Requests all user information
+ * @apiName GetUsers
+ * @apiGroup Users
+ *
+ * @apiSuccess {String} id Unique id of the user
+ * @apiSuccess {String} username Username of the user
+ * @apiSuccess {String} email Email of the user
+ * @apiSuccess {Date} memberSince Date when user joined
+ * @apiSuccess {String[]} geocachesVisited Geocaches that the user has logged visits
+ * @apiSuccess {String[]} geocachesCreated Geocaches that the user has created
+ */
 router.route('/users')
     // Adds a new user
     .post(function (req, res) {

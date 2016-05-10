@@ -1,6 +1,4 @@
-/**
- * Routes for geocache operations.
- */
+//Routes for geocache operations.
 
 var express = require('express');
 var router = express.Router();
