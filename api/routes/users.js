@@ -4,13 +4,13 @@
 
 var express = require('express');
 var router = express.Router();
-var models = require('../models/geocache');
+var userModel = require('../models/user');
 
 // https://{Base URL}/api/users
 router.route('/users')
     // Adds a new user
     .post(function (req, res) {
-        var user = new models.User();
+        var user = new userModel();
         user.username = req.body.username;
         user.password = req.body.password;
         user.email = req.body.email;
@@ -27,7 +27,7 @@ router.route('/users')
     // Gets all users
     .get(function (req, res) {
         // Populating geocache data for visited and created
-        models.User.find({}).populate('geocachesVisited geocachesCreated')
+        userModel.find({}).populate('geocachesVisited geocachesCreated')
             .exec(function (err, users) {
             if (err) {
                 res.send(err);
@@ -42,8 +42,8 @@ router.route('/users/:user_id')
     // Gets a user by ID
     .get(function (req, res) {
         // Populating geocache data for visited and created
-        models.User.findById.populate('geocachesVisited geocachesCreated')
-            .exec(req.params.user_id, function (err, user) {
+        userModel.findById(req.params.user_id).populate('geocachesVisited geocachesCreated')
+            .exec(function (err, user) {
             if (err) {
                 res.send(err);
             } else {
@@ -54,7 +54,7 @@ router.route('/users/:user_id')
 
     // Updates a user by ID
     .put(function (req, res) {
-        models.User.findById(req.params.user_id, function (err, user) {
+        userModel.findById(req.params.user_id, function (err, user) {
             if (err) {
                 res.send(err);
             } else {
@@ -75,7 +75,7 @@ router.route('/users/:user_id')
 
     // Deletes a user by ID
     .delete(function (req, res) {
-        models.User.remove({
+        userModel.remove({
             _id: req.params.user_id
         }, function (err, user) {
             if (err) {
