@@ -30,5 +30,5 @@ Testing for the Geothing API is done through [Mocha](https://mochajs.org/) augme
 To run the tests, run the following command from within the `/api/tests` folder:  
 `mocha {test file name}`  
 
-Alternatively, run the following from within the `api` folder to run all available tests:
+Alternatively, run the following from within the `api` folder to run all available tests:  
 `mocha tests/`
