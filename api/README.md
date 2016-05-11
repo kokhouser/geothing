@@ -22,4 +22,10 @@ To generate the documentation page, make sure you have apiDoc installed:
 Then run the following command:  
 `apidoc -i routes/ -o docs/`  
 
-The docs should appear in the /docs/ folder.
+The docs should appear in the `/docs/` folder.
+
+## Testing
+Testing for the Geothing API is done through [Mocha](https://mochajs.org/) augmented by [Should](https://shouldjs.github.io/). Tests are contained within the `/api/test` folder. Refer to the [Mocha wiki](https://github.com/mochajs/mocha/wiki) and/or look at existing tests to get an idea of how to start testing.  
+
+To run the tests, run the following command from within the `/api/test` folder:  
+`mocha {test file name}`
