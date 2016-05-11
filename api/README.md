@@ -16,5 +16,10 @@ The Geothing API is beautifully documented by generating docs through [apiDoc](h
 
 ![](../img/api/api_screenshot.png)
 
-To generate the documentation page, run the following command:  
-`apidoc -i routes/ -o docs/`
+To generate the documentation page, make sure you have apiDoc installed: 
+`npm install apidoc -g`  
+
+Then run the following command:
+`apidoc -i routes/ -o docs/`  
+
+The docs should appear in the /docs/ folder.
