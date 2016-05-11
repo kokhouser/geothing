@@ -1,5 +1,5 @@
 /**
- * Unit tests for API routes
+ * Unit tests for server health
  */
 
 process.env.NODE_ENV = 'test'; //Setting test enviroment
