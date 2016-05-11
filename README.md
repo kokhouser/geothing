@@ -12,3 +12,4 @@ This project aims to provide an end-to-end geocaching solution that consists of:
 - [MongoDB](https://www.mongodb.com/)
 - [Mongoose](http://mongoosejs.com/) (ODM Wrapper to interact with Mongo)
 - [React Native](https://facebook.github.io/react-native/) (For mobile apps)
+- [apiDoc](https://github.com/apidoc/apidoc) (For API documentation)
