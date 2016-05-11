@@ -32,6 +32,7 @@ router.use(function (req, res, next) {
 });
 
 router.get('/', function (req, res) {
+	res.status(200);
     res.json({message: "Welcome to Geothing's API."});
 });
 
