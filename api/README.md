@@ -14,5 +14,7 @@ Current plan is to provide simple CRUD operations on Geocache, User and Log obje
 ## Documentation
 The Geothing API is beautifully documented by generating docs through [apiDoc](https://github.com/apidoc/apidoc).
 
+![](../img/api/api_screenshot.png)
+
 To generate the documentation page, run the following command:  
 `apidoc -i routes/ -o docs/`
