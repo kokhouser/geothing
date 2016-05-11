@@ -1,17 +1,22 @@
 {
-    "name": "geothing",
-    "main": "server.js",
-    "description": "Geocache app thing.",
+  "name": "geothing",
+  "main": "server.js",
+  "description": "Geocache app thing.",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "4.x",
+    "mongoose": "4.x",
+    "body-parser": "~1.0.1"
+  },
+  "apidoc": {
+    "name": "Geothing API",
     "version": "0.0.1",
-    "private": true,
-    "dependencies": {
-        "express": "4.x",
-        "mongoose": "4.x",
-        "body-parser": "~1.0.1"
-    },
-    "apidoc": {
-      "name": "Geothing API",
-      "version": "0.0.1",
-      "description": "A geocaching API for the 21.16th century."
-    }
+    "description": "A geocaching API for the 21.16th century."
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5",
+    "should": "^8.3.1",
+    "supertest": "^1.2.0"
+  }
 }

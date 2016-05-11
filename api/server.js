@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 // Define app using express
 var app = express();
 var bodyParser = require('body-parser');
+var config = require('./_config');
 
 // Configure app using bodyParser() to enable reading data during POST
 app.use(bodyParser.urlencoded({extended: true}));
@@ -16,8 +17,14 @@ app.use(bodyParser.json());
 // Setting port
 var port = process.env.PORT || 8080; //Default to 8080 unless port parameter is set
 
-// Setting up MongoDB
-mongoose.connect('mongodb://localhost/geothing');
+// Setting up MongoDB based on environment
+mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
+	if(err) {
+		console.log('Error connecting to the database. ' + err);
+	} else {
+		console.log('Connected to Database: ' + config.mongoURI[app.settings.env]);
+	}
+});
 
 // Setting routes ======================================================================================================
 
@@ -27,7 +34,7 @@ var router = express.Router();
 // Future authentication + logging should go here
 router.use(function (req, res, next) {
     // Do stuff
-    console.log('Something is happening.');
+    //console.log('Something is happening.');
     next(); // Go to other routes
 });
 
@@ -48,6 +55,5 @@ app.use('/api', geocaches.router);
 // Format JSON responses for prettification by setting number of spaces
 app.set('json spaces', 2);
 app.listen(port);
-
 console.log('Listening on port ' + port);
 
