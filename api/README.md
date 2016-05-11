@@ -10,3 +10,9 @@ Current plan is to provide simple CRUD operations on Geocache, User and Log obje
 - Run the API server.
 `node server.js`
 - Server defaults to port 8080. Point your browser to "http://localhost:8080/api" to test.
+
+## Documentation
+The Geothing API is beautifully documented by generating docs through [apiDoc](https://github.com/apidoc/apidoc).
+
+To generate the documentation page, run the following command:  
+`apidoc -i routes/ -o docs/`
