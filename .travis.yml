@@ -8,4 +8,4 @@ install:
 script:
   - cd tests/
   - ./initializeTestDatabase.sh
-  - ../node_modules/mocha/bin/mocha tests/
+  - ../node_modules/mocha/bin/mocha .
