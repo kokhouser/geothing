@@ -45,6 +45,7 @@ router.post('/authenticate', function(req, res) {
 
           	// check if password matches
           	if (user.password != req.body.password) {
+          		res.status(401);
             	res.json({ success: false, message: 'Authentication failed. Wrong password.' });
           	} else {
 
@@ -55,6 +56,7 @@ router.post('/authenticate', function(req, res) {
 	            });
 
 	            // return the information including token as JSON
+	            res.status(200);
 	            res.json({
 	              	success: true,
 	              	message: 'Enjoy your token!',
