@@ -5,7 +5,7 @@ node_js:
 services: mongodb
 install:
   - cd api/
-  - npm -ls install
+  - npm install --dev
 script:
   - cd tests/
   - ./initializeTestDatabase.sh
