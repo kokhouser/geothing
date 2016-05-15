@@ -8,6 +8,7 @@ process.env.NODE_ENV = 'test'; //Setting test enviroment
 var supertest = require("supertest");
 var should = require("should");
 var app = require('../server');
+var authentication = require('../routes/authentication');
 
 var server = supertest.agent("http://localhost:8080"); //Change port here
 var userModel = require('../models/user');
@@ -15,6 +16,7 @@ var userModel = require('../models/user');
 describe("Test getting Users", function(){
 
 	var user;
+	var token;
 
 	// Creates a user and inserts into test database before any tests are run
 	beforeEach(function() {
@@ -41,32 +43,45 @@ describe("Test getting Users", function(){
 	});
 
 	it ("should return list of all users", function(done){
-		server
-		.get("/api/users")
-		.expect(200)
-		.expect('Content-Type', /json/)
-		.end(function(err,res){
-			should.not.exist(err);
-			res.status.should.equal(200);
-			userList = JSON.parse(res.text);
-			userList.length.should.equal(1);
-			done();
+		// Set token before each request
+		server.post('/api/authenticate').send({'username': user.username, 'password': user.password})
+		.end(function(err, res) {
+			token = res.body.token;
+			server
+			.get("/api/users")
+			.set('x-access-token', token)
+			.expect(200)
+			.expect('Content-Type', /json/)
+			.end(function(err,res){
+				should.not.exist(err);
+				res.status.should.equal(200);
+				userList = JSON.parse(res.text);
+				userList.length.should.equal(1);
+				done();
+			});
 		});
+		
 	});
 
 	it ("should return a single user by id", function (done) {
-		server
-		.get("/api/users/" + user._id)
-		.expect(200)
-		.expect('Content-Type', /json/)
-		.end(function(err,res){
-			should.not.exist(err);
-			res.status.should.equal(200);
-			newUser = JSON.parse(res.text);
-			should.exist(newUser);
-			done();
+		server.post('/api/authenticate').send({'username': user.username, 'password': user.password})
+		.end(function(err, res) {
+			token = res.body.token;
+			server
+			.get("/api/users/" + user._id)
+			.set('x-access-token', token)
+			.expect(200)
+			.expect('Content-Type', /json/)
+			.end(function(err,res){
+				should.not.exist(err);
+				res.status.should.equal(200);
+				newUser = JSON.parse(res.text);
+				should.exist(newUser);
+				done();
+			});
 		});
 	});
+		
 });
 
 describe("Test creating Users", function(){
