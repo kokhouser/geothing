@@ -33,7 +33,7 @@ To run the tests, first cd into the `/api/tests` folder and run the following to
 `./initializeTestDatabase.sh`  
 
 Then, run the following command from within the `/api/tests` folder:  
-`mocha {test file name}`  
+`node_modules/mocha/bin/mocha {test file name}`  
 
 Alternatively, run the following from within the `api` folder to run all available tests:  
-`mocha tests/`
+`node_modules/mocha/bin/mocha tests/`
