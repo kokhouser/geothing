@@ -78,6 +78,7 @@ router.route('/users')
      *     ]
      */
     .get(function (req, res) {
+        console.log("HERE");
         // Populating geocache data for visited and created
         userModel.find({}).populate('geocachesVisited geocachesCreated')
             .exec(function (err, users) {

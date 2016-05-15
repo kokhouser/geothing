@@ -38,14 +38,17 @@ app.use('/api', authentication.router);
 
 // Middleware to use for all requests
 router.use(function (req, res, next) {
-    // check header or url parameters or post parameters for token
+	if (req.method == "POST" && req.originalUrl == "/api/users") {
+		next();
+		return;
+	}
+	    // check header or url parameters or post parameters for token
 	var token = req.body.token || req.query.token || req.headers['x-access-token'];
-
 	// decode token
 	if (token) {
 
 	    // verifies secret and checks exp
-	    jwt.verify(token, app.get('secret'), function(err, decoded) {
+	    jwt.verify(token, config.secret, function(err, decoded) {
 	    	if (err) {
 	        	return res.json({ success: false, message: 'Failed to authenticate token.' });
 	    	} else {
@@ -55,7 +58,7 @@ router.use(function (req, res, next) {
 	    	}
 	    });
 
-	  } else {
+	} else {
 
 	    // if there is no token
 	    // return an error
@@ -63,7 +66,7 @@ router.use(function (req, res, next) {
 	        success: false,
 	        message: 'No token provided.'
 	    });
-	  }
+	}
 });
 
 router.get('/', function (req, res) {
