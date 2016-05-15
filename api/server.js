@@ -7,12 +7,17 @@ var mongoose = require('mongoose');
 
 // Define app using express
 var app = express();
+var jwt = require('jsonwebtoken');
 var bodyParser = require('body-parser');
+var userModel = require('./models/user');
+
 var config = require('./_config');
 
 // Configure app using bodyParser() to enable reading data during POST
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+app.set('secret', config.secret)
 
 // Setting port
 var port = process.env.PORT || 8080; //Default to 8080 unless port parameter is set
@@ -31,11 +36,74 @@ mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
 var router = express.Router();
 
 // Middleware to use for all requests
-// Future authentication + logging should go here
+// Authenticate users to generate webtoken
+// Note: Authenticate route is outside of middleware so that 
+// Inspiration from here -> https://scotch.io/tutorials/authenticate-a-node-js-api-with-json-web-tokens
+router.post('/authenticate', function(req, res) {
+
+      // find the user
+      userModel.findOne({
+        username: req.body.username
+      }, function(err, user) {
+
+        if (err) throw err;
+
+        if (!user) {
+          res.json({ success: false, message: 'Authentication failed. User not found.' });
+        } else if (user) {
+
+          // check if password matches
+          if (user.password != req.body.password) {
+            res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+          } else {
+
+            // if user is found and password is right
+            // create a token
+            var token = jwt.sign(user, app.get('secret'), {
+              expiresIn: '24h' // expires in 24 hours
+            });
+
+            // return the information including token as JSON
+            res.json({
+              success: true,
+              message: 'Enjoy your token!',
+              token: token
+            });
+          }   
+
+        }
+
+      });
+    });
+
 router.use(function (req, res, next) {
-    // Do stuff
-    //console.log('Something is happening.');
-    next(); // Go to other routes
+    // check header or url parameters or post parameters for token
+	  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+	  // decode token
+	  if (token) {
+
+	    // verifies secret and checks exp
+	    jwt.verify(token, app.get('secret'), function(err, decoded) {      
+	      if (err) {
+	        return res.json({ success: false, message: 'Failed to authenticate token.' });    
+	      } else {
+	        // if everything is good, save to request for use in other routes
+	        req.decoded = decoded;    
+	        next();
+	      }
+	    });
+
+	  } else {
+
+	    // if there is no token
+	    // return an error
+	    return res.status(403).send({ 
+	        success: false, 
+	        message: 'No token provided.' 
+	    });
+	    
+	  }
 });
 
 router.get('/', function (req, res) {
