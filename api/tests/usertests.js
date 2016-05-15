@@ -56,11 +56,10 @@ describe("Test getting Users", function(){
 				should.not.exist(err);
 				res.status.should.equal(200);
 				userList = JSON.parse(res.text);
-				userList.length.should.equal(1);
+				userList.length.should.equal(2);
 				done();
 			});
 		});
-		
 	});
 
 	it ("should return a single user by id", function (done) {
