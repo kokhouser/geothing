@@ -17,6 +17,7 @@ router.route('/geocaches')
      * @apiParam {Number} createdBy User id of the new geocache's creator
      * @apiParam {Number} xCoord X-coordinate of the new geocache
      * @apiParam {Number} yCoord Y-coordinate of the new geocache
+     * @apiParam {String} token Authentication token of existing user (see api/authentication).
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
      *     {
@@ -69,6 +70,7 @@ router.route('/geocaches')
      * @api {get} api/geocaches Requests all geocache information
      * @apiName GetGeocaches
      * @apiGroup Geocaches
+     * @apiParam {String} token Authentication token of existing user (see api/authentication).
      *
      * @apiSuccess {String} name Name of the geocache
      * @apiSuccess {String} description Description of the geocache
@@ -141,6 +143,7 @@ router.route('/geocaches/:geocache_id')
      * @api {get} api/geocaches/{geocache_id} Requests geocache information
      * @apiName GetGeocacheFromId
      * @apiGroup Geocaches
+     * @apiParam {String} token Authentication token of existing user (see api/authentication).
      *
      * @apiSuccess {String} name Name of the geocache
      * @apiSuccess {String} description Description of the geocache
@@ -194,6 +197,7 @@ router.route('/geocaches/:geocache_id')
      * @apiParam {String} description New description of the geocache
      * @apiParam {Number} xCoord New X-coordinate of the geocache
      * @apiParam {Number} yCoord New Y-coordinate of the geocache
+     * @apiParam {String} token Authentication token of existing user (see api/authentication).
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
      *     {
@@ -248,6 +252,7 @@ router.route('/geocaches/:geocache_id')
      * @api {delete} api/geocaches/{geocache_id} Deletes a geocache by id
      * @apiName DeleteGeocache
      * @apiGroup Geocaches
+     * @apiParam {String} token Authentication token of existing user (see api/authentication).
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK

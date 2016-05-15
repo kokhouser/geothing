@@ -25,6 +25,8 @@ Then run the following command:
 The docs should appear in the `/docs/` folder.
 
 ## Testing
+Note: Tests are currently broken after the addition of authentication tokens. A rehaul of the tests is pending.  
+
 Testing for the Geothing API is done through [Mocha](https://mochajs.org/) augmented by [Should](https://shouldjs.github.io/). Tests are contained within the `/api/test` folder. Refer to the [Mocha wiki](https://github.com/mochajs/mocha/wiki) and/or look at existing tests to get an idea of how to start testing.  
 
 To run the tests, run the following command from within the `/api/tests` folder:  
