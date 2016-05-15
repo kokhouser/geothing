@@ -1,5 +1,6 @@
 /**
  * Unit tests for server health
+ * TESTS ARE CURRENTLY BROKEN DUE TO ADDITION OF AUTHENTICATION.
  */
 
 process.env.NODE_ENV = 'test'; //Setting test enviroment

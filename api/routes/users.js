@@ -13,6 +13,7 @@ router.route('/users')
      * @apiParam {String} username Username of the new user
      * @apiParam {String} password Password of the new user
      * @apiParam {String} email Email of the new user
+     * @apiParam {String} token Authentication token of existing user (see api/authentication).
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
      *     {
@@ -47,6 +48,7 @@ router.route('/users')
      * @api {get} api/users Requests all user information
      * @apiName GetUsers
      * @apiGroup Users
+     * @apiParam {String} token Authentication token of existing user (see api/authentication).
      *
      * @apiSuccess {String} _id Unique id of the user
      * @apiSuccess {String} username Username of the user
@@ -94,6 +96,7 @@ router.route('/users/:user_id')
      * @api {get} api/users/{user_id} Requests user information
      * @apiName GetUserFromId
      * @apiGroup Users
+     * @apiParam {String} token Authentication token of existing user (see api/authentication).
      *
      * @apiSuccess {String} _id Unique id of the user
      * @apiSuccess {String} username Username of the user
@@ -133,6 +136,7 @@ router.route('/users/:user_id')
      *
      * @apiParam {String} username New username of the user
      * @apiParam {String} email New email of the user
+     * @apiParam {String} token Authentication token of existing user (see api/authentication).
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
      *     {
@@ -173,6 +177,7 @@ router.route('/users/:user_id')
      * @api {delete} api/users/{user_id} Deletes a user by id
      * @apiName DeleteUser
      * @apiGroup Users
+     * @apiParam {String} token Authentication token of existing user (see api/authentication).
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
