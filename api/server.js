@@ -38,6 +38,10 @@ app.use('/api', authentication.router);
 
 // Middleware to use for all requests
 router.use(function (req, res, next) {
+	if (req.method == "GET" && req.originalUrl == "/api") {
+		next();
+		return;
+	}
 	if (req.method == "POST" && req.originalUrl == "/api/users") {
 		next();
 		return;
