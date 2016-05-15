@@ -4,8 +4,8 @@ node_js:
 services: mongodb
 install:
   - cd api/
-  - npm install --dev
+  - npm install
 script:
   - cd tests/
   - ./initializeTestDatabase.sh
-  - mocha .
+  - node_modules/mocha/bin/mocha tests/
