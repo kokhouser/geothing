@@ -2,7 +2,7 @@
 A lightweight geocaching app for the 21.16th century.
 
 This project aims to provide an end-to-end geocaching solution that consists of:
-- A robust REST-ful API.
+- A robust REST-ful API. ![](https://travis-ci.org/kokhouser/geothing.svg?branch=master)
 - Beautiful and intuitive mobile applications for iOS and Android.
 
 ## Technologies/Libraries Used
