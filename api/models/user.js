@@ -7,9 +7,9 @@ var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
     // _id: Schema.Types.ObjectId,
-    username: {type: String, required: true},
+    username: {type: String, required: true, unique: true},
     password: {type: String, required: true},
-    email: {type: String, required: true},
+    email: {type: String, required: true, unique: true},
     memberSince: {type: Date, default: Date.now},
     geocachesVisited: [{type: mongoose.Schema.Types.ObjectId, ref: 'Geocache'}],
     geocachesCreated: [{type: mongoose.Schema.Types.ObjectId, ref: 'Geocache'}]

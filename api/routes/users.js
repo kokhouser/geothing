@@ -18,7 +18,7 @@ router.route('/users')
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
      *     {
-     *       "message": "User was created",
+     *       "success": true,
      *       "user": {
      *          "_id": "1q2w3e4r56t7yu8"
      *          "username": "JohnDoe",
@@ -35,11 +35,17 @@ router.route('/users')
         user.email = req.body.email;
         user.save(function (err) {
             if (err) {
-                res.status(400);
-                res.send(err);
+                if (err.code == 11000) {
+                    res.status(409);
+                    res.json({ success: false,
+                        message: 'Username or email already exists.' });
+                } else {
+                    res.status(400);
+                    res.send(err);
+                }
             } else {
                 res.status(200);
-                res.json({message: 'User was created.',
+                res.json({success: true,
                         user: user});
             }
         });
@@ -141,7 +147,7 @@ router.route('/users/:user_id')
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
      *     {
-     *       "message": "User has been updated",
+     *       "success": true,
      *       "user": {
      *          "_id": "1q2w3e4r56t7yu8"
      *          "username": "JohnDoel",
@@ -166,7 +172,7 @@ router.route('/users/:user_id')
                         res.send(err);
                     } else {
                         res.status(200);
-                        res.json({message: 'User has been updated.',
+                        res.json({success: true,
                                 user: user});
                     }
                 });
@@ -183,6 +189,7 @@ router.route('/users/:user_id')
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
      *     {
+     *       "success": true,
      *       "message": "User successfully deleted"
      *     }
      */
@@ -195,7 +202,7 @@ router.route('/users/:user_id')
                 res.send(err);
             } else {
                 res.status(200);
-                res.json({message: 'User sucessfully deleted'});
+                res.json({success: true, message: 'User sucessfully deleted'});
             }
         });
     });
