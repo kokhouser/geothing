@@ -6,12 +6,20 @@ node_js:
   - "5.1"
 notifications:
   email: false
-services: mongodb
+services:
+  - mongodb
+  - docker
+before_install:
+  - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+  - echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+  - sudo apt-get update
+  - sudo apt-get install mysql-server-5.6
+  - sudo apt-get install -y mongodb-org=3.0.5 mongodb-org-server=3.0.5 mongodb-org-shell=3.0.5 mongodb-org-mongos=3.0.5 mongodb-org-tools=3.0.5
 install:
   - cd api/
   - npm install
 script:
-  - which mongod
+  - sudo service mongod status
   - cd tests/
   - ./initializeTestDatabase.sh
   - ../node_modules/mocha/bin/mocha .
