@@ -1,4 +1,5 @@
 var express = require('express');
+var bcrypt = require('bcrypt');
 var app = express();
 var router = express.Router();
 var jwt = require('jsonwebtoken');
@@ -43,8 +44,8 @@ router.post('/authenticate', function(req, res) {
           res.json({ success: false, message: 'Authentication failed. User not found.' });
         } else if (user) {
 
-          	// check if password matches
-          	if (user.password != req.body.password) {
+          	// check if password hash matches
+          	if (bcrypt.compareSync(req.body.password, user.password) == false) {
           		res.status(401);
             	res.json({ success: false, message: 'Authentication failed. Wrong password.' });
           	} else {
