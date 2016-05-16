@@ -5,6 +5,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "bcrypt": "^0.8.6",
     "body-parser": "~1.0.1",
     "express": "4.x",
     "jsonwebtoken": "^6.2.0",

@@ -6,6 +6,7 @@
 process.env.NODE_ENV = 'test'; //Setting test enviroment
 
 var supertest = require("supertest");
+var bcrypt = require('bcrypt');
 var should = require("should");
 var app = require('../server');
 var authentication = require('../routes/authentication');
@@ -22,7 +23,7 @@ describe("Test getting Users", function(){
 	beforeEach(function() {
 		user = new userModel();
 		user.username = "Test user";
-		user.password = "password";
+		user.password = bcrypt.hashSync("testPassword", 10);
 		user.email = "testemail@email.com";
 		user.save(function(err) {
 			if (err) {
@@ -44,7 +45,7 @@ describe("Test getting Users", function(){
 
 	it ("should return list of all users", function(done){
 		// Set token before each request
-		server.post('/api/authenticate').send({'username': user.username, 'password': user.password})
+		server.post('/api/authenticate').send({'username': user.username, 'password': "testPassword"})
 		.end(function(err, res) {
 			token = res.body.token;
 			server
@@ -56,14 +57,14 @@ describe("Test getting Users", function(){
 				should.not.exist(err);
 				res.status.should.equal(200);
 				userList = JSON.parse(res.text);
-				userList.length.should.equal(2);
+				userList.length.should.equal(1);
 				done();
 			});
 		});
 	});
 
 	it ("should return a single user by id", function (done) {
-		server.post('/api/authenticate').send({'username': user.username, 'password': user.password})
+		server.post('/api/authenticate').send({'username': user.username, 'password': "testPassword"})
 		.end(function(err, res) {
 			token = res.body.token;
 			server
@@ -80,7 +81,6 @@ describe("Test getting Users", function(){
 			});
 		});
 	});
-		
 });
 
 describe("Test creating Users", function(){

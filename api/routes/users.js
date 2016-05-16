@@ -3,6 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var userModel = require('../models/user');
+var bcrypt = require('bcrypt');
 
 router.route('/users')
     /**
@@ -30,7 +31,7 @@ router.route('/users')
     .post(function (req, res) {
         var user = new userModel();
         user.username = req.body.username;
-        user.password = req.body.password;
+        user.password = bcrypt.hashSync(req.body.password, 10);
         user.email = req.body.email;
         user.save(function (err) {
             if (err) {
