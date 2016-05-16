@@ -1,4 +1,4 @@
-# GeoThing API
+# GeoThing API ![](https://travis-ci.org/kokhouser/geothing.svg?branch=master)
 A REST-ful API powered by Express and NodeJS, with a MongoDB database and Mongoose ODM.
 
 Current plan is to provide simple CRUD operations on Geocache, User and Log objects.
