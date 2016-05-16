@@ -11,6 +11,7 @@ install:
   - cd api/
   - npm install
 script:
+  - which mongod
   - cd tests/
   - ./initializeTestDatabase.sh
   - ../node_modules/mocha/bin/mocha .
