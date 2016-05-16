@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "5.1"
+notifications:
+  email: false
+services: mongodb
+install:
+  - cd api/
+  - npm install
+script:
+  - cd tests/
+  - ./initializeTestDatabase.sh
+  - ../node_modules/mocha/bin/mocha .
