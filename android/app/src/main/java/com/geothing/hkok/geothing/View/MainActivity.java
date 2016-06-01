@@ -1,7 +1,9 @@
-package com.geothing.hkok.geothing;
+package com.geothing.hkok.geothing.View;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.geothing.hkok.geothing.R;
 
 public class MainActivity extends AppCompatActivity {
 
