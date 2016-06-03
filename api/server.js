@@ -2,6 +2,9 @@
  * Main app file to configure API routes and run them.
  */
 
+// Getting logger
+var logger = require("./utils/logger");
+
 var express = require('express');
 var mongoose = require('mongoose');
 
@@ -10,6 +13,7 @@ var app = express();
 var jwt = require('jsonwebtoken');
 var bodyParser = require('body-parser');
 var userModel = require('./models/user');
+logger.debug("Overriding 'Express' logger");
 
 var config = require('./_config');
 
@@ -23,9 +27,9 @@ var port = process.env.PORT || 8080; //Default to 8080 unless port parameter is 
 // Setting up MongoDB based on environment
 mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
 	if(err) {
-		console.log('Error connecting to the database. ' + err);
+		logger.error('Error connecting to the database. ' + err);
 	} else {
-		console.log('Connected to Database: ' + config.mongoURI[app.settings.env]);
+		logger.info('Connected to Database: ' + config.mongoURI[app.settings.env]);
 	}
 });
 
@@ -38,6 +42,7 @@ app.use('/api', authentication.router);
 
 // Middleware to use for all requests
 router.use(function (req, res, next) {
+	logger.info(req.url + "(" + req.method + ")"+ " request from " + req.ip);
 	if (req.method == "GET" && req.originalUrl == "/api") {
 		next();
 		return;
@@ -90,5 +95,5 @@ app.use('/api', geocaches.router);
 // Format JSON responses for prettification by setting number of spaces
 app.set('json spaces', 2);
 app.listen(port);
-console.log('Listening on port ' + port);
+logger.info('Listening on port ' + port);
 
