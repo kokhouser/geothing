@@ -5,10 +5,10 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "bcrypt": "^0.8.6",
-    "body-parser": "~1.0.1",
+    "bcrypt": "^1.0.2",
+    "body-parser": "~1.17.1",
     "express": "4.x",
-    "jsonwebtoken": "^6.2.0",
+    "jsonwebtoken": "^7.4.0",
     "mongoose": "4.x",
     "winston": "^2.2.0"
   },
@@ -18,9 +18,9 @@
     "description": "A geocaching API for the 21.16th century."
   },
   "devDependencies": {
-    "mocha": "^2.4.5",
-    "should": "^8.3.1",
-    "supertest": "^1.2.0"
+    "mocha": "^3.3.0",
+    "should": "^11.2.1",
+    "supertest": "^3.0.0"
   },
   "scripts": {
     "start": "node server.js"
